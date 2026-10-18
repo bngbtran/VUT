@@ -1,4 +1,12 @@
 import { ImageResponse } from "next/og";
+import {
+  brandColors,
+  PLANE_PATH,
+  T_PATH,
+  U_PATH,
+  V_PATH,
+  WORDMARK_PLANE_TRANSFORM,
+} from "@/lib/brand";
 
 export const alt = "VÚT — Theo dõi chuyến bay";
 export const size = { width: 1200, height: 630 };
@@ -15,19 +23,19 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: 96,
-          background: "#0A1430",
-          color: "#F4F6FB",
+          background: brandColors.charcoal,
+          color: brandColors.bone,
         }}
       >
-        <svg viewBox="0 0 140 64" width="420" height="192">
-          <g fill="none" stroke="#F4F6FB" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M10 24 L24 56 L38 24" />
-            <path d="M52 24 V42 A14 14 0 0 0 80 42 V24" />
-            <path d="M94 24 H130 M112 24 V56" />
+        <svg viewBox="0 0 136 64" width="408" height="192">
+          <g fill={brandColors.bone}>
+            <path d={V_PATH} />
+            <path d={U_PATH} />
+            <path d={T_PATH} />
           </g>
-          <path d="M59 15 L74 5" fill="none" stroke="#FFB020" strokeWidth="7" strokeLinecap="round" />
+          <path d={PLANE_PATH} transform={WORDMARK_PLANE_TRANSFORM} fill={brandColors.terracotta} />
         </svg>
-        <div style={{ marginTop: 40, fontSize: 52, color: "#A9B4D0" }}>
+        <div style={{ marginTop: 40, fontSize: 52, color: brandColors.stone }}>
           Theo dõi chuyến bay. Vút.
         </div>
       </div>

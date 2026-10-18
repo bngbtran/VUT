@@ -2,23 +2,25 @@
 
 /* VÚT design tokens — xem brand/README.md */
 @theme {
-  --color-midnight: #0a1430;
-  --color-amber: #ffb020;
-  --color-sky: #4c8dff;
-  --color-cloud: #f4f6fb;
+  --color-charcoal: #1c1f22;
+  --color-terracotta: #c8643f;
+  --color-clay: #e38a64; /* đất nung sáng — chữ nhấn trên nền tối */
+  --color-bone: #efe9e1;
+  --color-slate: #5e7384;
+  --color-slate-300: #9db0bf;
 
-  --color-night-950: #060c1f;
-  --color-night-900: #0a1430;
-  --color-night-800: #111e42;
-  --color-night-700: #1b2a55;
-  --color-night-500: #5b6b94;
-  --color-night-300: #a9b4d0;
+  --color-ink-950: #121416;
+  --color-ink-900: #1c1f22;
+  --color-ink-800: #26292d;
+  --color-ink-700: #33373c;
+  --color-ink-500: #7a7f86;
+  --color-ink-300: #b5b0a8;
 
-  --color-status-ontime: #2bd67b;
-  --color-status-boarding: #4c8dff;
-  --color-status-delayed: #ff7a1a;
-  --color-status-cancelled: #ff4d5e;
-  --color-status-done: #a9b4d0;
+  --color-status-ontime: #7cc49a;
+  --color-status-boarding: #8fb3d1;
+  --color-status-delayed: #e0a54f;
+  --color-status-cancelled: #e0607e;
+  --color-status-done: #b5b0a8;
 
   --font-sans: var(--font-be-vietnam), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
@@ -29,6 +31,6 @@ html {
 }
 
 body {
-  background: var(--color-night-950);
-  color: var(--color-cloud);
+  background: var(--color-ink-950);
+  color: var(--color-bone);
 }

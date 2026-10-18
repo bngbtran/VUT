@@ -24,12 +24,12 @@ export function FlightBoard({ flights }: { flights: Flight[] }) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Mã chuyến bay hoặc điểm đến, vd VN213"
-          className="w-full rounded-xl border border-night-700 bg-night-900 px-4 py-3 text-base text-cloud placeholder:text-night-500 focus:border-sky focus:outline-none focus:ring-2 focus:ring-sky/30"
+          className="w-full rounded-xl border border-ink-700 bg-ink-900 px-4 py-3 text-base text-bone placeholder:text-ink-500 focus:border-slate focus:outline-none focus:ring-2 focus:ring-slate/30"
         />
       </label>
 
-      <div className="overflow-hidden rounded-2xl border border-night-800 bg-night-900">
-        <div className="hidden grid-cols-[5rem_6rem_1fr_5rem_4rem_10rem] gap-4 border-b border-night-800 px-5 py-3 text-xs font-semibold uppercase tracking-wider text-night-500 md:grid">
+      <div className="overflow-hidden rounded-2xl border border-ink-800 bg-ink-900">
+        <div className="hidden grid-cols-[5rem_6rem_1fr_5rem_4rem_10rem] gap-4 border-b border-ink-800 px-5 py-3 text-xs font-semibold uppercase tracking-wider text-ink-500 md:grid">
           <span>Giờ</span>
           <span>Chuyến</span>
           <span>Điểm đến</span>
@@ -38,38 +38,38 @@ export function FlightBoard({ flights }: { flights: Flight[] }) {
           <span>Trạng thái</span>
         </div>
 
-        <ul className="divide-y divide-night-800">
+        <ul className="divide-y divide-ink-800">
           {visible.map((f) => (
             <li
               key={f.number}
               className="grid grid-cols-[4.5rem_1fr_auto] items-center gap-x-4 gap-y-1 px-5 py-4 md:grid-cols-[5rem_6rem_1fr_5rem_4rem_10rem]"
             >
-              <div className="font-mono text-lg font-bold text-amber">
+              <div className="font-mono text-lg font-bold text-clay">
                 {f.estimatedTime ?? f.scheduledTime}
                 {f.estimatedTime && (
-                  <div className="text-xs font-medium text-night-500 line-through">
+                  <div className="text-xs font-medium text-ink-500 line-through">
                     {f.scheduledTime}
                   </div>
                 )}
               </div>
               <div className="font-mono font-semibold md:order-none">
                 {f.number}
-                <div className="font-sans text-xs font-normal text-night-500 md:hidden">
+                <div className="font-sans text-xs font-normal text-ink-500 md:hidden">
                   {f.destinationCity} · {f.destination}
                 </div>
               </div>
               <div className="hidden md:block">
                 <div className="font-semibold">{f.destinationCity}</div>
-                <div className="text-xs text-night-500">
+                <div className="text-xs text-ink-500">
                   {f.destination} · {f.airline}
                 </div>
               </div>
-              <div className="hidden font-mono text-night-300 md:block">{f.terminal ?? "—"}</div>
+              <div className="hidden font-mono text-ink-300 md:block">{f.terminal ?? "—"}</div>
               <div className="hidden font-mono text-lg font-bold md:block">{f.gate ?? "—"}</div>
               <div className="justify-self-end md:justify-self-start">
                 <StatusBadge status={f.status} />
                 {f.gate && (
-                  <div className="mt-1 text-right font-mono text-xs text-night-300 md:hidden">
+                  <div className="mt-1 text-right font-mono text-xs text-ink-300 md:hidden">
                     Cổng {f.gate}
                   </div>
                 )}
@@ -77,7 +77,7 @@ export function FlightBoard({ flights }: { flights: Flight[] }) {
             </li>
           ))}
           {visible.length === 0 && (
-            <li className="px-5 py-10 text-center text-night-500">
+            <li className="px-5 py-10 text-center text-ink-500">
               Không tìm thấy chuyến bay nào khớp với “{query}”.
             </li>
           )}

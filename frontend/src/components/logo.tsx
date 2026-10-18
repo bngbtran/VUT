@@ -1,39 +1,35 @@
-// Logo VÚT dạng inline SVG — nguồn gốc ở brand/logo/*.svg, giữ hình học đồng bộ.
-
-const AMBER = "#FFB020";
+// Logo VÚT dạng inline SVG — nguồn gốc ở brand/logo/*.svg; hình học và màu lấy từ lib/brand.
+import {
+  brandColors,
+  PLANE_PATH,
+  SYMBOL_PLANE_TRANSFORM,
+  SYMBOL_U_PATH,
+  T_PATH,
+  U_PATH,
+  V_PATH,
+  WORDMARK_PLANE_TRANSFORM,
+} from "@/lib/brand";
 
 export function LogoSymbol({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 64 64" className={className} role="img" aria-label="VÚT">
-      <rect width="64" height="64" rx="16" fill="#0A1430" />
-      <path
-        d="M12 26 L24 52 L36 26"
-        fill="none"
-        stroke="#F4F6FB"
-        strokeWidth="8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path d="M42 18 L53 10.5" fill="none" stroke={AMBER} strokeWidth="7" strokeLinecap="round" />
+      <rect width="64" height="64" rx="16" fill={brandColors.charcoal} />
+      <path d={SYMBOL_U_PATH} fill={brandColors.bone} />
+      <path d={PLANE_PATH} transform={SYMBOL_PLANE_TRANSFORM} fill={brandColors.terracotta} />
     </svg>
   );
 }
 
+/** Chữ dùng currentColor; máy bay ở dấu sắc luôn màu đất nung. */
 export function LogoWordmark({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 140 64" className={className} role="img" aria-label="VÚT">
-      <g
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="9"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M10 24 L24 56 L38 24" />
-        <path d="M52 24 V42 A14 14 0 0 0 80 42 V24" />
-        <path d="M94 24 H130 M112 24 V56" />
+    <svg viewBox="0 0 136 64" className={className} role="img" aria-label="VÚT">
+      <g fill="currentColor">
+        <path d={V_PATH} />
+        <path d={U_PATH} />
+        <path d={T_PATH} />
       </g>
-      <path d="M59 15 L74 5" fill="none" stroke={AMBER} strokeWidth="7" strokeLinecap="round" />
+      <path d={PLANE_PATH} transform={WORDMARK_PLANE_TRANSFORM} fill={brandColors.terracotta} />
     </svg>
   );
 }

@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0A1430",
+  themeColor: "#1C1F22",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -42,7 +42,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col font-sans">
         <SiteHeader />
         <main className="flex-1">{children}</main>
-        <footer className="border-t border-night-800 px-4 py-6 text-center text-sm text-night-500">
+        <footer className="border-t border-ink-800 px-4 py-6 text-center text-sm text-ink-500">
           VÚT · Theo dõi chuyến bay. Vút.
         </footer>
       </body>

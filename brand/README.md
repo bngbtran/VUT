@@ -6,7 +6,11 @@ VÚT là ứng dụng theo dõi chuyến bay: giờ bay, cổng, trạng thái, 
 
 ## 1. Ý tưởng cốt lõi
 
-**Dấu sắc là vệt cất cánh.** Dấu sắc trên chữ **Ú** được vẽ thành một vệt hổ phách hướng lên — đúng góc một máy bay rời đường băng. Màu hổ phách lấy từ chữ LED trên bảng giờ bay (FIDS) ở sân bay; nền xanh đêm là bầu trời lúc bay đêm.
+**Dấu sắc là chiếc máy bay đang bay.** Dấu sắc trên chữ **Ú** được vẽ thành một chiếc máy bay nhìn từ trên xuống, bay chéo lên đúng hướng nét dấu sắc — đọc là chữ "VÚT", nhìn là một chuyến bay vừa cất cánh.
+
+**Cùng một hướng bay.** Đầu nét V, Ú, T cắt xiên lên sang phải; thanh ngang chữ T nghiêng lên như đường băng nhìn theo hướng cất cánh. Cả chữ lao về phía trước.
+
+**Symbol** là chữ **Ú** trên ô than chì, với chiếc máy bay đất nung ở vị trí dấu sắc.
 
 | Giá trị | Thể hiện |
 |---|---|
@@ -22,43 +26,48 @@ VÚT là ứng dụng theo dõi chuyến bay: giờ bay, cổng, trạng thái, 
 | `logo/vut-wordmark-dark.svg` | Chữ VÚT trên nền sáng |
 | `logo/vut-wordmark-light.svg` | Chữ VÚT trên nền tối |
 | `logo/vut-lockup-dark.svg` | Symbol + chữ, trên nền sáng |
-| `logo/vut-lockup-light.svg` | Symbol + chữ, trên nền tối (nền khác `#0A1430` để ô symbol không chìm) |
+| `logo/vut-lockup-light.svg` | Symbol + chữ, trên nền tối |
 
 **Quy tắc**
-- Khoảng trống tối thiểu quanh logo = chiều cao nét chữ (≈ 1/7 chiều cao logo).
+- Khoảng trống tối thiểu quanh logo = độ dày nét chữ (≈ 1/6 chiều cao logo).
 - Kích thước tối thiểu: symbol 16px, wordmark 64px chiều ngang.
-- Vệt dấu sắc **luôn** là màu hổ phách `#FFB020`, kể cả trên nền sáng hay tối.
-- Không xoay, không đổ bóng, không đổi góc dấu sắc, không viết "Vut" hay "VUT" không dấu trong logo.
-- Trong văn bản: viết **VÚT** (in hoa) cho tên thương hiệu, "vút" (thường) khi dùng như từ thường.
+- Máy bay ở dấu sắc **luôn** màu đất nung `#C8643F`, trên mọi nền.
+- Không xoay, không đổ bóng, không đổi hướng bay hay thay máy bay bằng icon khác.
+- Không viết "Vut" hay "VUT" không dấu trong logo. Trong văn bản: **VÚT** (in hoa) cho tên thương hiệu.
 
 ## 3. Màu sắc
+
+Tông trầm, ấm — như bầu trời lúc hoàng hôn nhìn từ cửa sổ máy bay. Tránh các tổ hợp gắn với hãng bay Việt (xanh ngọc–vàng, đỏ–vàng, xanh lá).
 
 ### Màu thương hiệu
 | Tên | Hex | Vai trò |
 |---|---|---|
-| **Đêm** (Midnight) | `#0A1430` | Màu chủ đạo, nền tối, chữ trên nền sáng |
-| **Hổ phách** (Amber) | `#FFB020` | Màu nhận diện — dấu sắc, điểm nhấn, giờ bay trên bảng |
-| **Trời** (Sky) | `#4C8DFF` | Liên kết, nút tương tác, trạng thái đang chọn |
-| **Mây** (Cloud) | `#F4F6FB` | Nền sáng, chữ trên nền tối |
+| **Than** (Charcoal) | `#1C1F22` | Màu chủ đạo — nền tối, nền symbol, chữ trên nền sáng |
+| **Đất nung** (Terracotta) | `#C8643F` | Màu nhận diện — máy bay ở dấu sắc, điểm nhấn |
+| **Ngà** (Bone) | `#EFE9E1` | Nền sáng, chữ trên nền tối |
+| **Xám xanh** (Slate) | `#5E7384` | Tương tác, viền focus, thông tin phụ |
+| Đất nung sáng (Clay) | `#E38A64` | Chữ nhấn (giờ bay) trên nền tối — đủ tương phản |
 
 ### Thang nền tối (giao diện)
 | Token | Hex |
 |---|---|
-| `night-950` | `#060C1F` |
-| `night-900` | `#0A1430` |
-| `night-800` | `#111E42` |
-| `night-700` | `#1B2A55` |
-| `night-500` | `#5B6B94` (chữ phụ) |
-| `night-300` | `#A9B4D0` (chữ mờ) |
+| `ink-950` | `#121416` |
+| `ink-900` | `#1C1F22` |
+| `ink-800` | `#26292D` |
+| `ink-700` | `#33373C` |
+| `ink-500` | `#7A7F86` (chữ phụ) |
+| `ink-300` | `#B5B0A8` (chữ mờ) |
 
 ### Màu trạng thái chuyến bay
+Cũng hạ độ bão hòa cho hợp tông, nhưng vẫn phân biệt rõ:
+
 | Trạng thái | Hex |
 |---|---|
-| Đúng giờ | `#2BD67B` |
-| Đang lên máy bay | `#4C8DFF` |
-| Trễ | `#FF7A1A` |
-| Hủy | `#FF4D5E` |
-| Đã cất cánh / Đã hạ cánh | `#A9B4D0` |
+| Đúng giờ | `#7CC49A` |
+| Đang lên máy bay | `#8FB3D1` |
+| Trễ | `#E0A54F` |
+| Hủy | `#E0607E` |
+| Đã cất cánh / Đã hạ cánh | `#B5B0A8` |
 
 Trạng thái luôn có **chữ đi kèm**, không chỉ dựa vào màu (người mù màu vẫn đọc được).
 
