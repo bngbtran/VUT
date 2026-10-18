@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s · VÚT",
   },
   description:
-    "Theo dõi chuyến bay theo thời gian thực: giờ bay, cổng, trạng thái, băng chuyền hành lý.",
+    "Tra cứu chuyến bay trong ngày hôm nay: giờ bay, cổng, trạng thái, băng chuyền hành lý và thời tiết hai đầu hành trình.",
   applicationName: "VÚT",
 };
 

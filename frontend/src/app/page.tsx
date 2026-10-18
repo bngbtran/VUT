@@ -14,13 +14,14 @@ export default function Home({ searchParams }: PageProps<"/">) {
     <div className="mx-auto max-w-6xl px-4 pt-14 pb-16 md:pt-20">
       <section className="mb-14 flex flex-col items-start gap-6">
         <span className="rounded-full bg-terracotta/10 px-3 py-1 font-mono text-xs font-semibold tracking-widest text-clay uppercase ring-1 ring-terracotta/20">
-          Dữ liệu chuyến bay thời gian thực
+          Chuyến bay hôm nay
         </span>
         <h1 className="max-w-3xl text-4xl leading-[1.05] font-extrabold tracking-tight text-balance md:text-6xl">
           Theo dõi chuyến bay. <span className="text-terracotta">Vút.</span>
         </h1>
         <p className="max-w-xl text-lg text-ink-300">
-          Giờ bay, cổng, trạng thái và thời tiết hai đầu hành trình — trong một cái liếc mắt.
+          Tra cứu giờ bay, cổng, trạng thái và thời tiết hai đầu hành trình của các chuyến bay trong
+          ngày hôm nay.
         </p>
         <FlightSearch />
       </section>
