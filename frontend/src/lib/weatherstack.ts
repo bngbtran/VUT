@@ -70,7 +70,7 @@ async function fetchCurrent(query: string, key: string, protocol: "https" | "htt
 /** Thời tiết hiện tại tại một sân bay (theo toạ độ trong lib/airports). */
 export async function getAirportWeather(iata: string): Promise<ApiResult<Weather>> {
   "use cache: remote";
-  const key = process.env.WEATHERSTACK_ACCESS_KEY;
+  const key = process.env.WEATHERSTACK_ACCESS_KEY?.trim();
   const airport = findAirport(iata);
   if (!key || !airport) {
     cacheLife(ERROR_CACHE_LIFE);

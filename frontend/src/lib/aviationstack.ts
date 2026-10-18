@@ -39,7 +39,7 @@ type RawFlight = {
 };
 
 async function request(params: Record<string, string>): Promise<ApiResult<RawFlight[]>> {
-  const key = process.env.AVIATIONSTACK_ACCESS_KEY;
+  const key = process.env.AVIATIONSTACK_ACCESS_KEY?.trim();
   if (!key) return { ok: false, code: "missing_key" };
 
   const url = new URL("https://api.aviationstack.com/v1/flights");
