@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { AirportPicker } from "@/components/board-controls";
+import { AirportPicker, BoardTabs } from "@/components/board-controls";
 import { FlightBoard, FlightBoardSkeleton } from "@/components/flight-board";
 import { FlightSearch } from "@/components/flight-search";
 import { WeatherCard, WeatherCardSkeleton } from "@/components/weather-card";
@@ -7,6 +7,7 @@ import { DEFAULT_AIRPORT, findAirport } from "@/lib/airports";
 import { friendlyError } from "@/lib/api-error";
 import { getAirportBoard } from "@/lib/aviationstack";
 import { clockIn } from "@/lib/time";
+import type { BoardType } from "@/types/flight";
 
 export default function Home({ searchParams }: PageProps<"/">) {
   return (
@@ -37,21 +38,27 @@ async function BoardSection({ searchParams }: Pick<PageProps<"/">, "searchParams
   const requested = typeof params.airport === "string" ? params.airport.toUpperCase() : "";
   // Chỉ cho phép sân bay trong danh sách — tránh tốn lượt gọi API với giá trị tuỳ ý.
   const airport = findAirport(requested)?.board ? requested : DEFAULT_AIRPORT;
+  const type: BoardType = params.type === "arrival" ? "arrival" : "departure";
   const info = findAirport(airport)!;
 
   return (
     <section className="space-y-5">
-      <AirportPicker current={airport} />
-      <div className="pt-2">
-        <h2 className="text-2xl font-bold tracking-tight">
-          {info.city} <span className="font-mono text-lg text-ink-500">{airport}</span>
-        </h2>
-        <p className="text-sm text-ink-500">Chuyến khởi hành hôm nay · Sân bay {info.name}</p>
+      <AirportPicker current={airport} type={type} />
+      <div className="flex flex-wrap items-end justify-between gap-4 pt-2">
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight">
+            {info.city} <span className="font-mono text-lg text-ink-500">{airport}</span>
+          </h2>
+          <p className="text-sm text-ink-500">
+            Chuyến {type === "departure" ? "khởi hành" : "đến"} hôm nay · Sân bay {info.name}
+          </p>
+        </div>
+        <BoardTabs airport={airport} type={type} />
       </div>
 
       <div className="grid items-start gap-5 lg:grid-cols-[1fr_20rem]">
-        <Suspense key={airport} fallback={<FlightBoardSkeleton />}>
-          <Board airport={airport} />
+        <Suspense key={`${airport}-${type}`} fallback={<FlightBoardSkeleton />}>
+          <Board airport={airport} type={type} />
         </Suspense>
         <div className="space-y-5 lg:sticky lg:top-20">
           <Suspense key={airport} fallback={<WeatherCardSkeleton label="Thời tiết tại sân bay" />}>
@@ -63,8 +70,8 @@ async function BoardSection({ searchParams }: Pick<PageProps<"/">, "searchParams
   );
 }
 
-async function Board({ airport }: { airport: string }) {
-  const res = await getAirportBoard(airport, "departure");
+async function Board({ airport, type }: { airport: string; type: BoardType }) {
+  const res = await getAirportBoard(airport, type);
   if (!res.ok) {
     return (
       <div className="card px-6 py-12 text-center">
@@ -75,7 +82,7 @@ async function Board({ airport }: { airport: string }) {
   }
   return (
     <div className="space-y-2">
-      <FlightBoard flights={res.data} type="departure" airport={airport} />
+      <FlightBoard flights={res.data} type={type} airport={airport} />
       <p className="px-1 text-xs text-ink-500">
         {res.data.length} chuyến · cập nhật lúc {clockIn(res.fetchedAt, "Asia/Ho_Chi_Minh")} · nguồn
         aviationstack
