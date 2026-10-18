@@ -51,7 +51,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 href="https://github.com/bngbtran"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium text-bone underline decoration-terracotta decoration-2 underline-offset-4 hover:text-clay"
+                className="font-medium italic text-terracotta hover:text-clay"
               >
                 Bùi Ngọc Bảo Trân
               </a>
