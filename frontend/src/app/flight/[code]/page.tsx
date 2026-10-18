@@ -6,7 +6,8 @@ import { FlightSearch } from "@/components/flight-search";
 import { StatusBadge } from "@/components/status-badge";
 import { WeatherCard, WeatherCardSkeleton } from "@/components/weather-card";
 import { findAirport } from "@/lib/airports";
-import { friendlyError, type ApiResult } from "@/lib/api-error";
+import { friendlyError, isMaintenance, type ApiResult } from "@/lib/api-error";
+import { MaintenanceNotice } from "@/components/maintenance-notice";
 import { getAirportBoard, getFlightByCode, normalizeFlightCode } from "@/lib/aviationstack";
 import { clock, clockIn, formatDuration, localToEpoch } from "@/lib/time";
 import type { BoardType, Flight, FlightEndpoint } from "@/types/flight";
@@ -56,7 +57,10 @@ async function FlightDetail({
   const type = sp.type === "arrival" ? "arrival" : sp.type === "departure" ? "departure" : undefined;
   const res = await loadFlight(code, from, type);
 
-  if (!res.ok) return <Message title={`Chưa tải được chuyến ${code}`} body={friendlyError(res.code)} />;
+  if (!res.ok) {
+    if (isMaintenance(res.code)) return <MaintenanceNotice code={res.code} resetsOn={res.resetsOn} />;
+    return <Message title={`Chưa tải được chuyến ${code}`} body={friendlyError(res.code)} />;
+  }
   if (!res.data)
     return (
       <Message

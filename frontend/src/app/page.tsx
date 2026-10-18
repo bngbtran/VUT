@@ -4,7 +4,8 @@ import { FlightBoard, FlightBoardSkeleton } from "@/components/flight-board";
 import { FlightSearch } from "@/components/flight-search";
 import { WeatherCard, WeatherCardSkeleton } from "@/components/weather-card";
 import { DEFAULT_AIRPORT, findAirport } from "@/lib/airports";
-import { friendlyError } from "@/lib/api-error";
+import { friendlyError, isMaintenance } from "@/lib/api-error";
+import { MaintenanceNotice } from "@/components/maintenance-notice";
 import { getAirportBoard } from "@/lib/aviationstack";
 import { getWeatherBatch } from "@/lib/weather";
 import { clockIn } from "@/lib/time";
@@ -74,6 +75,7 @@ async function BoardSection({ searchParams }: Pick<PageProps<"/">, "searchParams
 async function Board({ airport, type }: { airport: string; type: BoardType }) {
   const res = await getAirportBoard(airport, type);
   if (!res.ok) {
+    if (isMaintenance(res.code)) return <MaintenanceNotice code={res.code} resetsOn={res.resetsOn} />;
     return (
       <div className="card px-6 py-12 text-center">
         <p className="font-semibold">Chưa tải được bảng giờ bay</p>

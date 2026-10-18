@@ -1,6 +1,7 @@
 import { cacheLife } from "next/cache";
 import { cityOf } from "@/lib/airports";
 import { ERROR_CACHE_LIFE, type ApiResult } from "@/lib/api-error";
+import { reserveCall } from "@/lib/quota";
 import { stripOffset } from "@/lib/time";
 import type { BoardType, Flight, FlightEndpoint, FlightStatus } from "@/types/flight";
 
@@ -41,6 +42,10 @@ type RawFlight = {
 async function request(params: Record<string, string>): Promise<ApiResult<RawFlight[]>> {
   const key = process.env.AVIATIONSTACK_ACCESS_KEY?.trim();
   if (!key) return { ok: false, code: "missing_key" };
+
+  // Hạn mức tháng: giữ chỗ 1 lượt trước khi gọi; hết lượt → không gọi.
+  const quota = await reserveCall();
+  if (!quota.ok) return quota;
 
   const url = new URL("https://api.aviationstack.com/v1/flights");
   url.searchParams.set("access_key", key);
