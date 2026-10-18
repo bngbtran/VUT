@@ -1,6 +1,6 @@
-import type { WeatherKind } from "@/lib/weatherstack";
+import type { WeatherKind } from "@/lib/weather";
 
-// Bộ icon nét thống nhất (stroke 1.75) — tự vẽ để đồng bộ với giao diện, không dùng ảnh của weatherstack.
+// Bộ icon nét thống nhất (stroke 1.75) — tự vẽ để đồng bộ với giao diện, không dùng ảnh từ nguồn dữ liệu.
 
 const SUN = (
   <>

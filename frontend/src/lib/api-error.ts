@@ -22,6 +22,8 @@ export function friendlyError(code: string): string {
       return "Gọi API quá nhanh, thử lại sau ít phút.";
     case "method_not_supported":
       return "Khoá API không dùng được cho dịch vụ này.";
+    case "unknown_airport":
+      return "Chưa có toạ độ của sân bay này.";
     case "network":
       return "Không kết nối được nguồn dữ liệu.";
     default:

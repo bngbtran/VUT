@@ -6,6 +6,7 @@ import { WeatherCard, WeatherCardSkeleton } from "@/components/weather-card";
 import { DEFAULT_AIRPORT, findAirport } from "@/lib/airports";
 import { friendlyError } from "@/lib/api-error";
 import { getAirportBoard } from "@/lib/aviationstack";
+import { getWeatherBatch } from "@/lib/weather";
 import { clockIn } from "@/lib/time";
 import type { BoardType } from "@/types/flight";
 
@@ -80,12 +81,20 @@ async function Board({ airport, type }: { airport: string; type: BoardType }) {
       </div>
     );
   }
+  // Thời tiết đầu còn lại của mọi chuyến — gom vào một lần gọi Open-Meteo
+  const other = type === "departure" ? "arrival" : "departure";
+  const weather = await getWeatherBatch(res.data.map((f) => f[other].iata));
   return (
     <div className="space-y-2">
-      <FlightBoard flights={res.data} type={type} airport={airport} />
+      <FlightBoard
+        flights={res.data}
+        type={type}
+        airport={airport}
+        weather={weather.ok ? weather.data : undefined}
+      />
       <p className="px-1 text-xs text-ink-500">
         {res.data.length} chuyến · cập nhật lúc {clockIn(res.fetchedAt, "Asia/Ho_Chi_Minh")} · nguồn
-        aviationstack
+        aviationstack, Open-Meteo
       </p>
     </div>
   );

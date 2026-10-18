@@ -26,10 +26,11 @@ npm run dev   # http://localhost:3000
 | Dữ liệu | Nguồn | Biến môi trường |
 |---|---|---|
 | Chuyến bay: giờ, cổng, nhà ga, băng chuyền, trạng thái, vị trí | [aviationstack](https://aviationstack.com) | `AVIATIONSTACK_ACCESS_KEY` |
-| Thời tiết hiện tại ở điểm đi / điểm đến | [weatherstack](https://weatherstack.com) | `WEATHERSTACK_ACCESS_KEY` |
+| Thời tiết hiện tại ở điểm đi / điểm đến | [Open-Meteo](https://open-meteo.com) | không cần key |
 
 - Key chỉ dùng ở server (không có tiền tố `NEXT_PUBLIC_`) nên không lộ ra trình duyệt. Không commit `.env.local`.
-- Gói miễn phí có hạn mức theo tháng, nên kết quả được cache dùng chung (`use cache: remote`): chuyến bay ~30 phút, thời tiết ~1 giờ, lỗi ~1 phút. Chỉnh trong `src/lib/aviationstack.ts` và `src/lib/weatherstack.ts`.
+- aviationstack gói miễn phí có hạn mức theo tháng, nên kết quả được cache dùng chung (`use cache: remote`): chuyến bay ~30 phút, thời tiết ~15 phút (Open-Meteo cập nhật mỗi 15 phút), lỗi ~1 phút. Chỉnh trong `src/lib/aviationstack.ts` và `src/lib/weather.ts`.
+- Thời tiết của mọi sân bay trên bảng giờ bay được gom vào **một** lần gọi Open-Meteo (API nhận danh sách toạ độ).
 - Bảng giờ bay chỉ mở cho các sân bay có `board: true` trong `src/lib/airports.ts`.
 - aviationstack trả giờ **địa phương** của từng sân bay (dù gắn nhãn `+00:00`) — xem `src/lib/time.ts`.
 
@@ -39,4 +40,4 @@ Trang bộ nhận diện: `/brand`.
 
 Project Vercel trỏ **Root Directory = `frontend`**, framework Next.js (tự nhận). Mỗi lần push lên `main` là deploy production.
 
-Nhớ thêm `AVIATIONSTACK_ACCESS_KEY` và `WEATHERSTACK_ACCESS_KEY` trong **Settings → Environment Variables** của project.
+Nhớ thêm `AVIATIONSTACK_ACCESS_KEY` trong **Settings → Environment Variables** của project, rồi Redeploy. Kiểm tra bằng `/api/health` (chỉ trả về có/không, không lộ key).

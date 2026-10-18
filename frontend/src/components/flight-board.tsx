@@ -5,17 +5,22 @@ import { useState } from "react";
 import type { BoardType, Flight } from "@/types/flight";
 import { StatusBadge } from "@/components/status-badge";
 import { clock } from "@/lib/time";
+import type { Weather } from "@/lib/weather";
+import { WeatherIcon } from "@/components/weather-icon";
 
-const COLS = "md:grid-cols-[5.5rem_6.5rem_1fr_4.5rem_4rem_9rem]";
+const COLS = "md:grid-cols-[5.5rem_6.5rem_1fr_5.5rem_4.5rem_4rem_9rem]";
 
 export function FlightBoard({
   flights,
   type,
   airport,
+  weather = {},
 }: {
   flights: Flight[];
   type: BoardType;
   airport: string;
+  /** Thời tiết theo mã sân bay (đầu còn lại của mỗi chuyến) */
+  weather?: Record<string, Weather>;
 }) {
   const [query, setQuery] = useState("");
   const q = query.trim().toLowerCase();
@@ -59,6 +64,7 @@ export function FlightBoard({
         <span>Giờ</span>
         <span>Chuyến</span>
         <span>{type === "departure" ? "Điểm đến" : "Điểm đi"}</span>
+        <span>Thời tiết</span>
         <span>Nhà ga</span>
         <span>Cổng</span>
         <span>Trạng thái</span>
@@ -83,8 +89,11 @@ export function FlightBoard({
                 </div>
                 <div className="min-w-0">
                   <div className="font-mono font-semibold">{f.code}</div>
-                  <div className="truncate text-xs text-ink-500 md:hidden">
-                    {f[other].city} · {f[other].iata}
+                  <div className="flex items-center gap-1.5 text-xs text-ink-500 md:hidden">
+                    <span className="truncate">
+                      {f[other].city} · {f[other].iata}
+                    </span>
+                    <WeatherChip w={weather[f[other].iata]} />
                   </div>
                 </div>
                 <div className="hidden min-w-0 md:block">
@@ -92,6 +101,9 @@ export function FlightBoard({
                   <div className="truncate text-xs text-ink-500">
                     {f[other].iata} · {f.airline}
                   </div>
+                </div>
+                <div className="hidden md:block">
+                  <WeatherChip w={weather[f[other].iata]} big />
                 </div>
                 <div className="hidden font-mono text-ink-300 md:block">{f[side].terminal ?? "—"}</div>
                 <div className="hidden font-mono text-lg font-bold md:block">{f[side].gate ?? "—"}</div>
@@ -114,6 +126,16 @@ export function FlightBoard({
         )}
       </ul>
     </div>
+  );
+}
+
+function WeatherChip({ w, big }: { w?: Weather; big?: boolean }) {
+  if (!w) return big ? <span className="text-ink-500">—</span> : null;
+  return (
+    <span className="inline-flex shrink-0 items-center gap-1 text-ink-300" title={w.description}>
+      <WeatherIcon kind={w.kind} isDay={w.isDay} className={big ? "size-5" : "size-3.5"} />
+      <span className={big ? "text-sm font-medium" : ""}>{w.temperature}°</span>
+    </span>
   );
 }
 

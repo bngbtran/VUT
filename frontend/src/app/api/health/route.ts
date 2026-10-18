@@ -8,6 +8,5 @@ export async function GET() {
     env: process.env.VERCEL_ENV ?? "local",
     commit: process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? null,
     AVIATIONSTACK_ACCESS_KEY: has("AVIATIONSTACK_ACCESS_KEY"),
-    WEATHERSTACK_ACCESS_KEY: has("WEATHERSTACK_ACCESS_KEY"),
   });
 }

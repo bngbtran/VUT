@@ -1,6 +1,6 @@
 import { friendlyError } from "@/lib/api-error";
 import { findAirport } from "@/lib/airports";
-import { getAirportWeather } from "@/lib/weatherstack";
+import { getAirportWeather } from "@/lib/weather";
 import { WeatherIcon } from "@/components/weather-icon";
 
 export async function WeatherCard({ iata, label }: { iata: string; label?: string }) {
@@ -8,8 +8,8 @@ export async function WeatherCard({ iata, label }: { iata: string; label?: strin
   const res = await getAirportWeather(iata);
 
   return (
-    <section className="card p-5">
-      <header className="flex items-baseline justify-between gap-3">
+    <section className="card @container p-5">
+      <header className="flex flex-col gap-1 @sm:flex-row @sm:items-baseline @sm:justify-between @sm:gap-3">
         <div className="min-w-0">
           {label && (
             <div className="text-xs font-semibold uppercase tracking-widest text-ink-500">{label}</div>
@@ -19,7 +19,7 @@ export async function WeatherCard({ iata, label }: { iata: string; label?: strin
           </div>
         </div>
         {res.ok && res.data.localtime && (
-          <div className="shrink-0 font-mono text-xs text-ink-500">
+          <div className="font-mono text-xs text-ink-500 @sm:shrink-0">
             {res.data.localtime.slice(11)} giờ địa phương
           </div>
         )}
@@ -37,7 +37,7 @@ export async function WeatherCard({ iata, label }: { iata: string; label?: strin
               <div className="text-sm text-ink-300">{res.data.description}</div>
             </div>
           </div>
-          <dl className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 text-sm sm:grid-cols-4">
+          <dl className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 text-sm @sm:grid-cols-4">
             <Stat label="Cảm giác" value={`${res.data.feelsLike}°`} />
             <Stat label="Độ ẩm" value={`${res.data.humidity}%`} />
             <Stat label="Gió" value={`${res.data.windSpeed} km/h ${res.data.windDir}`} />

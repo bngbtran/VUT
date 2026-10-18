@@ -132,7 +132,7 @@ async function FlightDetail({
 
       <p className="px-1 text-xs text-ink-500">
         Cập nhật lúc {clockIn(res.fetchedAt, "Asia/Ho_Chi_Minh")} (giờ Việt Nam) · giờ hiển thị là giờ địa
-        phương tại từng sân bay · nguồn aviationstack, weatherstack
+        phương tại từng sân bay · nguồn aviationstack, Open-Meteo
       </p>
     </div>
   );
