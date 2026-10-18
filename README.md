@@ -11,9 +11,12 @@ Theo dõi chuyến bay — giờ bay, cổng, trạng thái. *Vút.*
 
 ## Chạy local
 
+Dùng Node trong conda env `msa` (không cài gì global lên máy). Env đã đặt sẵn `npm_config_cache` vào trong env và tắt telemetry của Next.
+
 ```bash
+conda activate msa
 cd frontend
-npm install
+npm ci        # cài đúng theo package-lock.json
 npm run dev   # http://localhost:3000
 ```
 

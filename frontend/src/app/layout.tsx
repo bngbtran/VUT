@@ -42,8 +42,21 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col font-sans">
         <SiteHeader />
         <main className="flex-1">{children}</main>
-        <footer className="border-t border-ink-800 px-4 py-6 text-center text-sm text-ink-500">
-          VÚT · Theo dõi chuyến bay. Vút.
+        <footer className="border-t border-ink-800 py-6 text-sm text-ink-500">
+          <div className="mx-auto flex max-w-6xl flex-col items-center px-4 justify-between gap-2 text-center sm:flex-row sm:text-left">
+            <span>VÚT · Theo dõi chuyến bay. Vút.</span>
+            <span>
+              Thiết kế & phát triển bởi{" "}
+              <a
+                href="https://github.com/bngbtran"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-bone underline decoration-terracotta decoration-2 underline-offset-4 hover:text-clay"
+              >
+                Bùi Ngọc Bảo Trân
+              </a>
+            </span>
+          </div>
         </footer>
       </body>
     </html>
