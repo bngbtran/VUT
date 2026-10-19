@@ -97,8 +97,8 @@ export function FlightBoard({
                   </div>
                 </div>
                 <div className="hidden min-w-0 md:block">
-                  <div className="truncate font-semibold">{f[other].city}</div>
-                  <div className="truncate text-xs text-ink-500">
+                  <div className="font-semibold break-words">{f[other].city}</div>
+                  <div className="text-xs break-words text-ink-500">
                     {f[other].iata} · {f.airline}
                   </div>
                 </div>
