@@ -8,7 +8,7 @@ import { clock } from "@/lib/time";
 import type { Weather } from "@/lib/weather";
 import { WeatherIcon } from "@/components/weather-icon";
 
-const COLS = "md:grid-cols-[5.5rem_6.5rem_1fr_5.5rem_4.5rem_4rem_9rem]";
+const COLS = "md:grid-cols-[4.5rem_5.5rem_1fr_5rem_3.5rem_3.5rem_7.5rem]";
 
 export function FlightBoard({
   flights,
@@ -59,7 +59,7 @@ export function FlightBoard({
       </div>
 
       <div
-        className={`hidden gap-4 px-5 py-3 text-[11px] font-semibold uppercase tracking-widest text-ink-500 md:grid ${COLS}`}
+        className={`hidden gap-3 px-5 py-3 text-[11px] font-semibold uppercase tracking-widest text-ink-500 md:grid ${COLS}`}
       >
         <span>Giờ</span>
         <span>Chuyến</span>
@@ -79,7 +79,7 @@ export function FlightBoard({
             <li key={`${f.code}-${f.date}`}>
               <Link
                 href={`/flight/${f.code}?from=${airport}&type=${type}`}
-                className={`grid grid-cols-[4.5rem_1fr_auto] items-center gap-x-4 gap-y-1 px-5 py-3.5 transition-colors hover:bg-white/[0.03] ${COLS}`}
+                className={`grid grid-cols-[4.5rem_1fr_auto] items-center gap-x-4 gap-y-1 px-5 py-3.5 md:gap-x-3 transition-colors hover:bg-white/[0.03] ${COLS}`}
               >
                 <div className="font-mono">
                   <div className={`text-lg font-bold ${changed ? "text-status-delayed" : "text-clay"}`}>
@@ -97,8 +97,8 @@ export function FlightBoard({
                   </div>
                 </div>
                 <div className="hidden min-w-0 md:block">
-                  <div className="font-semibold break-words">{f[other].city}</div>
-                  <div className="text-xs break-words text-ink-500">
+                  <div className="truncate font-semibold" title={f[other].city}>{f[other].city}</div>
+                  <div className="truncate text-xs text-ink-500" title={`${f[other].iata} · ${f.airline}`}>
                     {f[other].iata} · {f.airline}
                   </div>
                 </div>
